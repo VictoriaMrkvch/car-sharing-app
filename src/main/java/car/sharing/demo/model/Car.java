@@ -10,10 +10,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.math.BigDecimal;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 @Entity
+@NoArgsConstructor
 @SQLDelete(sql = "UPDATE cars SET is_deleted = TRUE WHERE id = ?")
 @Where(clause = "is_deleted = FALSE")
 @Data
@@ -35,4 +37,8 @@ public class Car {
     private BigDecimal dailyFee;
     @Column(name = "is_deleted")
     private boolean isDeleted = false;
+
+    public Car(Long id) {
+        this.id = id;
+    }
 }
