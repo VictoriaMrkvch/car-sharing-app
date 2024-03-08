@@ -15,4 +15,6 @@ public interface RentalService {
             throws RentalException;
 
     List<RentalDto> getRentalsByUserId(Long id, boolean isActive);
+
+    void checkOverdueRentals();
 }
