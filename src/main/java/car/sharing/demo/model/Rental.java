@@ -10,9 +10,11 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+@NoArgsConstructor
 @Entity
 @SQLDelete(sql = "UPDATE rentals SET is_deleted = TRUE WHERE id = ?")
 @Where(clause = "is_deleted = FALSE")
@@ -36,4 +38,8 @@ public class Rental {
     private User user;
     @Column(name = "is_deleted")
     private boolean isDeleted = false;
+
+    public Rental(Long id) {
+        this.id = id;
+    }
 }

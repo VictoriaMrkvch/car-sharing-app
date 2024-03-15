@@ -84,4 +84,11 @@ public class RentalServiceImpl implements RentalService {
             notificationService.sendNotification("No rentals overdue today!");
         }
     }
+
+    @Override
+    public Rental getRentalById(Long id) {
+        return rentalRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException("Can't find rental by id " + id)
+        );
+    }
 }

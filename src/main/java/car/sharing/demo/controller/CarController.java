@@ -8,6 +8,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,7 @@ public class CarController {
     private final CarService carService;
 
     @PostMapping
+    @PreAuthorize("hasAuthority('MANAGER')")
     public CarDto save(@RequestBody @Valid CreateCarRequestDto requestDto) {
         return carService.save(requestDto);
     }
@@ -40,12 +42,14 @@ public class CarController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('MANAGER')")
     public CarDto updateById(@PathVariable Long id,
                              @RequestBody @Valid CreateCarRequestDto requestDto) {
         return carService.updateCarById(id, requestDto);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PreAuthorize("hasAuthority('MANAGER')")
     @DeleteMapping("/id")
     public void deleteById(@PathVariable Long id) {
         carService.deleteCarById(id);
