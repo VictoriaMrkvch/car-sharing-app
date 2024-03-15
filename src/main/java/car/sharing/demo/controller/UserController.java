@@ -6,6 +6,7 @@ import car.sharing.demo.dto.user.UserDto;
 import car.sharing.demo.service.user.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -20,6 +21,7 @@ public class UserController {
     private final UserService userService;
 
     @PutMapping("/{id}/role")
+    @PreAuthorize("hasAuthority('MANAGER')")
     public UserDto updateRole(@PathVariable Long id,
                               @RequestBody @Valid UpdateRoleRequestDto requestDto) {
         return userService.updateRole(id, requestDto);

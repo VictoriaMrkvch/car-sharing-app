@@ -4,6 +4,7 @@ import car.sharing.demo.dto.rental.ActualReturnDateDto;
 import car.sharing.demo.dto.rental.CreateRentalDto;
 import car.sharing.demo.dto.rental.RentalDto;
 import car.sharing.demo.exception.RentalException;
+import car.sharing.demo.model.Rental;
 import java.util.List;
 
 public interface RentalService {
@@ -17,4 +18,6 @@ public interface RentalService {
     List<RentalDto> getRentalsByUserId(Long id, boolean isActive);
 
     void checkOverdueRentals();
+
+    Rental getRentalById(Long id);
 }
