@@ -11,10 +11,12 @@ import jakarta.persistence.Table;
 import java.math.BigDecimal;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 @Entity
+@Accessors(chain = true)
 @NoArgsConstructor
 @SQLDelete(sql = "UPDATE cars SET is_deleted = TRUE WHERE id = ?")
 @Where(clause = "is_deleted = FALSE")
